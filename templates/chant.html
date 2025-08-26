@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ chant.title }} - 常山喝彩词</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fdf6e3;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .back-btn {
+            display: inline-block;
+            margin: 20px;
+            padding: 10px 20px;
+            background-color: #b58900;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .category-tag {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #eee8d5;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .chant-text {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fdf6e3;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-btn">返回首页</a>
+        
+        <div class="card">
+            <h1>{{ chant.title }}</h1>
+            <span class="category-tag">{{ chant.category }}</span>
+            <div class="chant-text">{{ chant.text }}</div>
+            <p>{{ chant.description }}</p>
+        </div>
+    </div>
+</body>
+</html>

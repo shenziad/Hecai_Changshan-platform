@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>常山喝彩歌谣非物质文化遗产</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fdf6e3;
+    }
+    header {
+      background-color: #b58900;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background-color: #eee8d5;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #657b83;
+      font-weight: bold;
+    }
+    section {
+      padding: 30px;
+    }
+    h2 {
+      color: #cb4b16;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>常山喝彩歌谣非物质文化遗产</h1>
+    <p>传承中华文化瑰宝，共享喝彩魅力</p>
+  </header>
+
+  <nav>
+    <a href="#inheritors">传承人</a>
+    <a href="#chants">喝彩词</a>
+    <a href="#teaching">教学书籍</a>
+    <a href="#media">音视频资料</a>
+    <a href="#about">关于我们</a>
+  </nav>
+
+  <section id="inheritors">
+    <h2>代表性传承人</h2>
+    <div id="inheritors-list">
+        {% for inheritor in inheritors %}
+        <div class="card">
+            <h3><a href="{{ url_for('inheritor_detail', id=inheritor.id) }}">{{ inheritor.name }}</a></h3>
+            <p>{{ inheritor.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+  </section>
+
+  <section id="chants">
+    <h2>喝彩词精选</h2>
+    <div id="chants-list">
+        {% for chant in chants %}
+        <div class="card">
+            <h3><a href="{{ url_for('chant_detail', id=chant.id) }}">{{ chant.title }}</a></h3>
+            <span class="category-tag">{{ chant.category }}</span>
+        </div>
+        {% endfor %}
+    </div>
+  </section>
+
+  <section id="teaching">
+    <h2>教学书籍与资料</h2>
+    <div class="card">
+      <h3>《常山喝彩入门》</h3>
+      <p>适合初学者，图文并茂，深入浅出。</p>
+    </div>
+    <div class="card">
+      <h3>《喝彩艺术与表演技巧》</h3>
+      <p>从表演、声腔、文化背景全面讲解。</p>
+    </div>
+  </section>
+
+  <section id="media">
+    <h2>音视频资料</h2>
+    <div class="card">
+      <p><a href="#">常山喝彩教学视频（点击观看）</a></p>
+      <p><a href="#">经典喝彩演出录音（点击收听）</a></p>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>关于我们</h2>
+    <p>本网站致力于弘扬和推广常山喝彩歌谣这一非物质文化遗产，提供全面资料与学习资源。</p>
+  </section>
+
+  <footer style="background-color:#eee8d5;text-align:center;padding:10px;">
+    版权所有 © 常山非遗文化网 2025
+  </footer>
+  <script>
+    // 获取喝彩词
+    fetch('/api/chants')
+      .then(response => response.json())
+      .then(data => {
+        const chantsContainer = document.getElementById('chants-list');
+        data.forEach(chant => {
+          const div = document.createElement('div');
+          div.classList.add('card');
+          div.innerHTML = `<p>${chant.text}</p>`;
+          chantsContainer.appendChild(div);
+        });
+      });
+
+    // 获取教学书籍
+    fetch('/api/teaching_books')
+      .then(response => response.json())
+      .then(data => {
+        const booksContainer = document.getElementById('teaching-books-list');
+        data.forEach(book => {
+          const div = document.createElement('div');
+          div.classList.add('card');
+          div.innerHTML = `<h3>${book.title}</h3><p>${book.description}</p>`;
+          booksContainer.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>
